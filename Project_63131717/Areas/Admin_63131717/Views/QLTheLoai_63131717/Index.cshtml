@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<Project_63131717.Models.TheLoai>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<style>
+    a {
+        text-decoration: none;
+        color: black
+    }
+</style>
+<div class="pb-4 d-flex align-items-center">
+    <h2 style="font-family:Arial, Helvetica, sans-serif;font-weight:600;color:#413939;margin:0;">THỂ LOẠI</h2>
+    <a style="margin-left:30px;padding:5px 10px;border:2px solid blue;border-radius:10px" href="~/Admin_63131717/QLTheLoai_63131717/Create"><i class="fa-solid fa-plus"></i></a>
+</div>
+
+<table class="table table-striped-columns" style="margin:0 auto">
+    <tr style="background: #f8eeee">
+        <th>
+            ID thể loại
+        </th>
+        <th>
+            Tên thể loại
+        </th>
+        <th class="text-center">
+            Chức năng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.IDTheLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.TenTheLoai)
+            </td>
+
+            <td class="text-center">
+                <a href="@Url.Action("Delete",new { id = item.IDTheLoai})" class="edit-btn"><abbr title="Xóa dữ liệu"><img src="~/Areas/Admin_63131717/Content/Images/delete.png" width="20" height="20" /></abbr></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

@@ -1,0 +1,155 @@
+﻿@model Project_63131717.Models.DocGia
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+}
+
+<style>
+    body {
+        background: #f5e7e7
+    }
+    /* Định dạng tổng thể cho form */
+    .form-horizontal {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    /* Định dạng cho tiêu đề */
+    h4 {
+        text-align: center;
+        font-weight: 700;
+    }
+
+    /* Định dạng cho nhãn và input */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    /* Định dạng cho nút Lưu */
+    input[type="submit"] {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #2575b7;
+        }
+
+    /* Định dạng cho thông báo lỗi */
+    .text-danger {
+        color: #ff6347;
+    }
+
+    input {
+        margin-top: 10px
+    }
+    a{text-decoration:none}
+    .btn-back {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .btn-back:hover, .btn-delete:hover {
+            background-color: #0056b3;
+     }
+
+
+    .btn-delete {
+        background-color: #007bff !important;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0;
+        margin-right: 15px;
+    }
+</style>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4 style="color:blue" class="text-uppercase">Thêm độc giả mới</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenDG, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.TenDG, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenDG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DienThoai, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NameUser, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.NameUser, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NameUser, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group no-color d-flex justify-content-center align-items-center">
+        <input type="submit" value="Tạo mới" class="btn btn-delete" /> |
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-back" })
+    </div>
+</div>
+}
+
+

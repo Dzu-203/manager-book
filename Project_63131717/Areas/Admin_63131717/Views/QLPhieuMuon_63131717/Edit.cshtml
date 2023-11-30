@@ -1,0 +1,153 @@
+﻿@model Project_63131717.Models.PhieuMuon
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+}
+
+
+<style>
+    body {
+        background: #f5e7e7
+    }
+
+    a {
+        text-decoration: none
+    }
+    /* Định dạng tổng thể cho form */
+    .form-horizontal {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    /* Định dạng cho tiêu đề */
+    h4 {
+        text-align: center;
+        font-weight: 700;
+    }
+
+    /* Định dạng cho nhãn và input */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    /* Định dạng cho nút Lưu */
+    input[type="submit"], .submit a {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover, .submit a:hover {
+            background-color: #2575b7;
+        }
+
+    /* Định dạng cho thông báo lỗi */
+    .text-danger {
+        color: #ff6347;
+    }
+
+    input, textarea {
+        margin: 10px 0;
+    }
+
+    textarea {
+        width: 100%;
+        height: 120px;
+    }
+</style>
+
+@*<script type="text/javascript">
+        $(function () {
+            $('#NgayTraThucTe').datepicker();
+        })
+    </script>*@
+
+
+
+
+@using (Html.BeginForm(Html.BeginForm("Edit", "QLPhieuMuon_63131717", FormMethod.Post)))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 class="text-center text-uppercase" style="color:blue">thông tin phiếu mượn</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IDPM)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDDG, htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.IDDG, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            @Html.ValidationMessageFor(model => model.IDDG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DocGia.TenDG,"Tên độc giả", htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.DocGia.TenDG, new { htmlAttributes = new { @class = "form-control", @readonly = "true"   } })
+            @Html.ValidationMessageFor(model => model.DocGia.TenDG, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NgayMuon, htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.NgayMuon, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            @Html.ValidationMessageFor(model => model.NgayMuon, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NgayTra, htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.NgayTra, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+            @Html.ValidationMessageFor(model => model.NgayTra, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TienPhat, htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.TienPhat, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TienPhat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group submit">
+        <div class="col-md-offset-2 col-md-12 d-flex justify-content-around align-items-center">
+            <input style="margin:0;" type="submit" value="Lưu thay đổi" class="btn btn-default" />
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    </div>
+</div>
+}

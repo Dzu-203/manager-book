@@ -1,0 +1,67 @@
+﻿@model Project_63131717.Models.DocGia
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Content/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Content/css/style-lg.css">
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("LoginAcc", "Login_63131717", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="~/Content/Image/signin-image.jpg" alt="singin image"></figure>
+                        <a href="~/Login_63131717/Register" class="signup-image-link">Tạo tài khoản mới</a>
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">ĐĂNG NHẬP</h2>
+                        <form method="POST" class="register-form" id="login-form">
+                            <div class="form-group">
+                                <label for="NameUser"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="NameUser" id="NameUser" placeholder="Tài khoản" />
+                            </div>
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="Password" id="Password" placeholder="Mật khẩu" />
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Nhớ tài khoản ?</label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" class="form-submit" style="background:#2429f7" value="Log in" />
+                            </div>
+                        </form>
+                        <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/main.js"></script>
+</body>
+</html>

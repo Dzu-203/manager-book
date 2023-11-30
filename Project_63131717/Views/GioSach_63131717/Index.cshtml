@@ -1,0 +1,110 @@
+﻿@model Project_63131717.Models.GioSach_63131717
+
+
+@{
+    ViewBag.Title = "Phiếu mượn";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+
+
+
+<h2 style="text-align: center; color: #0d1a69;font-weight:700" class="text-uppercase">Phiếu Mượn Sách</h2>
+
+<a style="padding:5px 18px;margin-bottom:3%;background:red;color:white" class="btn btn-default" href="@Url.Action("Index","ListBook_63131717") ">Tiếp tục Mượn </a>
+<style>
+    td, th {
+        text-align: center
+    }
+</style>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+                <!-- ... nội dung của bảng đầu tiên ... -->
+                <thead style="background: #f7eded ">
+                    <tr>
+                        <th>Tên Sách</th>
+                        <th>Hình ảnh</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng cộng</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                
+            </table>
+        </div>
+        <div class="col-md-4" style="padding:10px;border-left:1px solid #000">
+            <table class="table">
+                <!-- ... nội dung của bảng thứ hai ... -->
+                <tbody>
+                    <h2 class="text-center mb-3 text-uppercase" style="color:#07065b;font-weight:700">Thông tin</h2>
+                    <hr />
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="4" style="text-align:center">
+                            @using (Html.BeginForm("MuonSach", "GioSach_63131717", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <table style="border-collapse: separate; border-spacing: 5px">
+                                    <tr>
+                                        <td>Tài khoản:</td>
+                                        <td><input type="text" name="NameUser" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mật khẩu:</td>
+                                        <td><input type="password" name="Password" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày Mượn:</td>
+                                        <td><input type="datetime" value="@DateTime.Now.ToString("dd/MM/yyyy")" name="NgayMuon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày Trả:</td>
+                                        <td><input type="date" style="width:100%" name="NgayTra" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input type="submit" name="Muon" value="Mượn Sách" class="btn btn-success" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align:right">Tổng Cộng: 0</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.delete-btn').on('click', function (e) {
+            e.preventDefault(); // Ngăn chặn chuyển hướng mặc định của thẻ 'a'
+
+            var url = $(this).attr('href'); // Lấy đường dẫn từ thuộc tính href của thẻ 'a'
+
+            // Hiển thị hộp thoại xác nhận
+            if (confirm("Bạn có chắc chắn muốn xóa sách này không?")) {
+                // Nếu người dùng xác nhận, chuyển hướng đến đường dẫn được lấy từ href
+                window.location.href = url;
+            }
+        });
+    });
+</script>

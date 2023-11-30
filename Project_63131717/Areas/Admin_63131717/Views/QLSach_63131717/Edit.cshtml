@@ -1,0 +1,156 @@
+﻿@model Project_63131717.Models.Sach
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+}
+
+<style>
+    body {
+        background: #f5e7e7
+    }
+    a{text-decoration:none}
+    /* Định dạng tổng thể cho form */
+    .form-horizontal {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    /* Định dạng cho tiêu đề */
+    h4 {
+        text-align: center;
+        font-weight: 700;
+    }
+
+    /* Định dạng cho nhãn và input */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    /* Định dạng cho nút Lưu */
+    input[type="submit"], .submit a {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover, .submit a:hover {
+            background-color: #2575b7;
+        }
+
+    /* Định dạng cho thông báo lỗi */
+    .text-danger {
+        color: #ff6347;
+    }
+
+    input ,textarea{
+        margin: 10px 0;
+    }
+    textarea {
+        width: 100%;
+        height: 120px;
+    }
+</style>
+
+
+@using (Html.BeginForm("Edit","QLSach_63131717",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-center text-uppercase" style="color:blue">Sửa thông tin cuốn sách</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDSach)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenSach, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDTheLoai, "Thể loại", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.DropDownList("IDTheLoai", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDTheLoai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TacGia, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TacGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayXuatBan, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.NgayXuatBan, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NgayXuatBan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-12">
+                <input type="file" style="height:30px;" name="Avatar" accept="image/*" />
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <img src="~/Areas/Admin_63131717/Images/@Model.HinhAnh" alt="Hình ảnh" width="100" height="100" />
+            </div>
+        </div>
+
+        <div class="form-group submit">
+            <div class="col-md-offset-2 col-md-12 d-flex justify-content-around align-items-center">
+                <input style="margin:0;" type="submit" value="Lưu thay đổi" class="btn btn-default" />
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    
+</div>

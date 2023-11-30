@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<Project_63131717.Models.PhieuMuon>
+@using PagedList.Mvc
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+    var i = 0;
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    a {
+        text-decoration: none;
+        color: black
+    }
+</style>
+<div class="pb-4 d-flex align-items-center">
+    <h2 style="font-family:Arial, Helvetica, sans-serif;font-weight:600;color:#413939;margin:0;">PHIẾU MƯỢN</h2>
+</div>
+
+<table class="table table-striped-columns">
+    <tr style="background: #f8eeee">
+        <th>
+            STT
+        </th>
+        <th>
+            ID phiếu mượn
+        </th>
+        <th>
+            ID độc giả
+        </th>
+        <th>
+            Tên độc giả
+        </th>
+        <th>
+            Ngày mượn
+        </th>
+        <th>
+            Ngày trả
+        </th>
+        <th>
+            Tiền phạt 
+        </th>
+        <th>
+            Ghi chú
+        </th>
+
+        <th class="text-center">
+            Chức năng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    i = i + 1;
+                }
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDDG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocGia.TenDG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayMuon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TienPhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td class="text-center">
+                @Html.ActionLink("Gia hạn", "Edit", new { id = item.IDPM }) |
+                @Html.ActionLink("Phạt", "Phat", new { id = item.IDPM }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.IDPM })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

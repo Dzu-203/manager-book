@@ -1,0 +1,154 @@
+﻿@model Project_63131717.Models.Sach
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<style>
+    body {
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .details-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 800px;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    h2 {
+        color: #007bff;
+    }
+
+    dl {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    dt, dd {
+        flex: 0 0 48%;
+        margin-bottom: 10px;
+    }
+
+    .btn-back {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-delete:hover {
+        background: #8b0b0b;
+        color: #fff
+    }
+
+    .btn-delete {
+        background-color: red;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 15px;
+    }
+    dd{
+        text-align:start
+    }
+    dl{
+        margin-left:25%;
+        text-align:start
+    }
+</style>
+
+<div class="details-container">
+    <h2 class="text-danger">Bạn chắc chắn muốn sách này ?</h2>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TacGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayXuatBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheLoai.TenTheLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheLoai.TenTheLoai)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color d-flex justify-content-center align-items-center">
+            <input type="submit" value="Xóa" class="btn btn-delete" /> |
+            @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-back" })
+        </div>
+    }
+</div>

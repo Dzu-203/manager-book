@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="145e5ce5b9354bfe99aac80e7bce817a" Name="Diagram1">
+        <EntityTypeShape EntityType="Project_63131717Model.CT_PM" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.DangNhap" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.DocGia" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.PhieuMuon" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.Sach" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.sysdiagram" Width="1.5" PointX="7.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.TheLoai" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63131717Model.TrangThai" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="Project_63131717Model.FK_CT_PM_DocGia" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63131717Model.FK_CT_PM_PhieuMuon" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63131717Model.FK_CT_PM_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63131717Model.FK_CT_PM_TrangThai" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63131717Model.FK_PhieuMuon_DocGia" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63131717Model.FK_Sach_TheLoai" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

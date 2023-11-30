@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<Project_63131717.Models.Sach>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+    Project_63131717.Models.Project_63131717Entities db = new Project_63131717.Models.Project_63131717Entities();
+    <link href="~/Content/StyleHome.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style>
+
+        a {
+            text-decoration: none;
+            color: black
+        }
+
+        .list_book {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: start; /* Thay đổi từ flex-start thành space-around để giữ khoảng cách giữa các thẻ */
+        }
+
+        .card {
+            margin-bottom: 20px;
+            margin-right: 20px;
+            flex: 0 1 calc(33.33% - 20px); /* Thay đổi chiều rộng của thẻ card để chia layout thành 3 cột */
+            max-width: 100px; /* Giới hạn chiều rộng tối đa của thẻ card */
+            display: flex;
+            flex-direction: column; /* Chuyển sang layout theo chiều dọc */
+        }
+
+        .card-body {
+            flex: 1; /* Cho phép nội dung linh hoạt mở rộng */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Chia không gian đều giữa các phần tử con */
+            padding: 10px; /* Thêm padding để tạo khoảng cách */
+            text-align: center; /* Căn giữa theo chiều dọc */
+        }
+
+            .card-body h5,
+            .card-body p,
+            .card-body a {
+                width: 100%; /* Chiều rộng 100% để căn giữa theo chiều ngang */
+                box-sizing: border-box; /* Ngăn chặn phần padding và border làm tăng chiều rộng */
+                margin-bottom: 10px; /* Khoảng cách giữa các phần tử */
+            }
+
+            .card-body p {
+                margin-bottom: 0; /* Loại bỏ khoảng trắng dưới */
+            }
+    </style>
+</head>
+<body>
+    <div class="body_listbook">
+        <div class="row">
+            <div class="col-md-3 theloai" style="margin-top:20px">
+                <div class="search d-flex justify-content-lg-around">
+                    <input type="text" placeholder="Tên sách cần tìm" name="tenSach" id="tenSach" value="@ViewBag.tenSach" />
+                    <button onclick="search()" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+                <div class="left-content-listbook" style="margin-top:50px">
+                    <div class="category">
+                        <div class="category-left-title">
+                            <h4 class="text-center pt-1">DANH MỤC SÁCH</h4>
+                        </div>
+                        <hr />
+                        <ul>
+                            <li style="font-size:18px;margin-bottom:5px">
+                                @Html.ActionLink("All", "Index", "ListBook_63131717")
+                            </li>
+                            @foreach (var item in db.TheLoais)
+                            {
+                                <li style="font-size: 18px; margin-bottom: 5px">
+                                    @Html.ActionLink(item.TenTheLoai, "SachTheoTheLoai", "ListBook_63131717", new { tenTheLoai = item.TenTheLoai }, null)
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 text-center list_book m-4" style="margin-right:0 !important">
+                @foreach (var item in Model)
+                {
+                    <div class="card" style="max-width: 15rem;min-width:12rem;max-height:30rem;min-height:10rem;background:#edeff7">
+                        <img class="card-img-top mx-auto mt-3" src="~/Areas/Admin_63131717/Images/@item.HinhAnh" style="max-width:150px;max-height:200px;object-fit:cover" alt="Hình ảnh">
+                        <div class="card-body d-flex align-items-center">
+                            <h5 class="card-title">@item.TenSach</h5>
+                            <p class="card-text">Số lượng: @item.SoLuong</p>
+                            @*<a style="margin-top:30px;max-width:120px" href="~/GioSach_63131717/Addto/@item.IDSach" class="btn btn-primary">Mượn sách</a>*@
+                            <a style="margin-top:30px;max-width:120px" href="@Url.Action("HienThi",new {id = item.IDSach})" class="btn btn-primary">Mượn sách</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, tenSach = @ViewBag.tenSach }))
+        </div>
+    </div>
+    <script>
+        function search() {
+            var searchTerm = $('#tenSach').val();
+            window.location.href = '/ListBook_63131717/Index?tenSach=' + searchTerm;
+        }
+    </script>
+</body>
+</html>

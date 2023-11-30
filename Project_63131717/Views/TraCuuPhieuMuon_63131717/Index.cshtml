@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<Project_63131717.Models.CT_PM>
+@using PagedList.Mvc
+@{ 
+    var i = 0;
+    Project_63131717.Models.Project_63131717Entities db = new Project_63131717.Models.Project_63131717Entities();
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+    <link href="~/Content/PagedList.css" rel="stylesheet"/>
+
+}
+<h2 class="text-center mb-5 text-uppercase" style="color: #0d1a69; font-weight: 700 ">Danh sách Phiếu Mượn</h2>
+
+<table class="table mx-auto">
+    <thead style="background:#f7eded">
+        <tr>
+            <th>Số thứ tự</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Hình ảnh</th>
+            <th>Số lượng</th>
+            <th>Ngày mượn</th>
+            <th>Ngày Trả</th>
+            <th>Tiền phạt</th>
+            <th>Trạng thái</th>
+            <!-- Thêm các cột khác tùy theo yêu cầu -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var phieuMuon in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        i = i + 1;
+                    }
+                    @i
+                </td>
+                <td>@phieuMuon.Sach.TenSach</td>
+                <td>@phieuMuon.Sach.TacGia</td>
+                <td><img src="~/Areas/Admin_63131717/Images/@phieuMuon.Sach.HinhAnh" alt="Hình ảnh sách" style="width: 100px; height: 120px;object-fit:cover" /></td>
+                <td>@phieuMuon.SoLuong</td>
+                <td>@phieuMuon.PhieuMuon.NgayMuon.Value.ToString("dd/MM/yyyy")</td>
+                <td>@phieuMuon.PhieuMuon.NgayTra.Value.ToString("dd/MM/yyyy")</td>
+                <td>@phieuMuon.PhieuMuon.TienPhat</td>
+                <td>@phieuMuon.TrangThai1.TenTrangThai</td>
+                <!-- Thêm các ô khác tùy theo yêu cầu -->
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

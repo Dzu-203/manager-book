@@ -1,0 +1,142 @@
+﻿@model PagedList.IPagedList<Project_63131717.Models.Sach>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+    var i = 0;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+    a {
+        text-decoration: none;
+        color: black
+    }
+    .table-striped-columns td:nth-child(4) {
+        max-width: 200px; /* Đặt giới hạn độ rộng tối đa cho cột mô tả, điều chỉnh theo ý muốn của bạn */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .table-striped-columns td:nth-child(2) {
+        max-width: 180px; /* Đặt giới hạn độ rộng tối đa cho cột mô tả, điều chỉnh theo ý muốn của bạn */ 
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+<div class="d-flex justify-content-between align-items-center">
+    <div class="pb-4 d-flex align-items-center">
+        <h2 style="font-family:Arial, Helvetica, sans-serif;font-weight:600;color:#413939;margin:0;">SÁCH</h2>
+        <a style="margin-left:30px;padding:5px 10px;border:2px solid blue;border-radius:10px" href="~/Admin_63131717/QLSach_63131717/Create"><i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <select id="searchDropdown" style="padding:5px 15px;margin-right:10px;">
+            <option value="tenSach">Tên sách</option>
+            <option value="theLoai">Thể loại</option>
+            <option value="tacGia">Tác giả</option>
+        </select>
+        <input type="text" style="padding:5px;margin-right:10px" id="searchInput" value="@ViewBag.searchInput" placeholder="Nhập tên cần tìm" />
+        <button onclick="search()" class="btn btn-primary">Tìm</button>
+    </div>
+</div>
+
+<table class="table table-striped-columns">
+    <tr style="background: #f8eeee">
+        <th>
+            STT
+        </th>
+        <th>
+            Tên sách
+        </th>
+        <th>
+            Thể loại
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Tác giả
+        </th>
+        <th>
+            Ngày xuất bản
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th class="text-center">
+            Chức năng
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    i = i + 1;
+                }
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai.TenTheLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TacGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayXuatBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                <img src="~/Areas/Admin_63131717/Images/@item.HinhAnh" style="width:80px;height:100px;object-fit:cover" />
+            </td>
+            <td class="text-center">
+                <a href="@Url.Action("Edit",new { id = item.IDSach})" class="edit-btn"><abbr title="Cập nhật dữ liệu"><img src="~/Areas/Admin_63131717/Content/Images/edit.png" width="20" height="20" /></abbr></a>
+                <a href="@Url.Action("Details",new { id = item.IDSach})" class="edit-btn"><abbr title="Chi tiết dữ liệu"><img src="~/Areas/Admin_63131717/Content/Images/details.png" width="20" height="20" /></abbr></a>
+                <a href="@Url.Action("Delete",new { id = item.IDSach})" class="edit-btn"><abbr title="Xóa dữ liệu"><img src="~/Areas/Admin_63131717/Content/Images/delete.png" width="20" height="20" /></abbr></a>
+            </td>
+        </tr>
+
+    }
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchDropdown = ViewBag.searchDropdown, searchInput = ViewBag.searchInput }))
+</div>
+
+<script>
+    // Biến để lưu giá trị vừa chọn
+    var selectedSearchOption = '@ViewBag.searchDropdown';
+
+    $(document).ready(function () {
+        // Set giá trị cho dropdown khi trang được tải
+        $('#searchDropdown').val(selectedSearchOption);
+
+        // Bắt sự kiện khi dropdown thay đổi giá trị
+        $('#searchDropdown').change(function () {
+            selectedSearchOption = $(this).val();
+        });
+    });
+
+    function search() {
+        var selectInput = $('#searchInput').val();
+        window.location.href = '/Admin_63131717/QLSach_63131717/Index?searchDropdown=' + selectedSearchOption + '&searchInput=' + selectInput;
+    }
+</script>
+

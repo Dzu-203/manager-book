@@ -1,0 +1,37 @@
+﻿@model Project_63131717.Models.Sach
+@{
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+}
+
+<!DOCTYPE html>
+<style>
+    hr {
+        color: #0a1190 !important
+    }
+</style>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thông tin</title>
+    <link href="~/Content/css/bootstrap.css" rel=" stylesheet" />
+</head>
+<body>
+    <div class="row p-3 container-fluid mt-5 w-75 mx-auto" style="border:1px solid #ccc">
+        <div class="left-dislay mx-auto col-md-4 d-flex justify-content-center" style="border:1px solid #ccc">
+            <img src="~/Areas/Admin_63131717/Images/@Model.HinhAnh" width="350" height="500" />
+        </div>
+        <div class="right-dislay col-md-7">
+            <h3>@Model.TenSach</h3><hr />
+            <p>Tác giả : <span style="color:red;font-weight:700">@Model.TacGia</span></p><hr /><hr />
+            <p>Mô tả : <span style="font-style:italic">@Model.MoTa</span></p>
+            <p>Số sách còn lại : <span style="color:blue;font-weight:700">@Model.SoLuong cuốn sách</span></p>
+            <form action="~/GioSach_63131717/Addto/@Model.IDSach" method="get">
+                <p>Số lượng : <input type="number" name="quantity" style="width:80px;margin-left:20px" min="0" required /></p>
+                <div style="padding: 5px; background: #f8eeee; margin-top: 100px; display: flex; justify-content: end; align-items: center">
+                    <button type="submit" class="btn btn-primary">Thêm giỏ hàng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

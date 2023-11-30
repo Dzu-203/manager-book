@@ -1,0 +1,104 @@
+﻿@model Project_63131717.Models.DocGia
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link rel="stylesheet" href="~/Content/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Content/css/style-lg.css">
+    <style>
+        a{
+            text-decoration:none;
+            color:black
+        }
+        .field-validation-error {
+            color: red;
+            padding-bottom:30px
+        }
+        .form-group{
+            margin-bottom:10px
+        }
+        
+
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Register", "Login_63131717", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">ĐĂNG KÍ</h2>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="TenDG"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input class="form-control" type="text" name="TenDG" id="TenDG" placeholder="Tên của bạn" />
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TenDG)
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="DienThoai"><i class="zmdi zmdi-phone"></i></label>
+                                <input class="form-control" type="text" name="DienThoai" id="DienThoai" placeholder="Số điện thoại" />
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.DienThoai)
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="DiaChi"><i class="zmdi zmdi-account-calendar"></i></label>
+                                <input class="form-control" type="text" name="DiaChi" id="DiaChi" placeholder="Địa chỉ" />
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.DiaChi)
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="NameUser"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input class="form-control" type="email" name="NameUser" id="NameUser" placeholder="Tên tài khoản" />
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.NameUser)
+                        </div>
+                       
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="Password"><i class="zmdi zmdi-lock"></i></label>
+                                <input class="form-control" type="password" name="Password" id="Password" placeholder="Mật khẩu" />
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                        
+                        <div class="form-group">
+                            <input class="form-control agree-term" type="checkbox" name="agree-term" id="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input class="form-control form-submit" type="submit" style="background:#2429f7" value="Register" />
+                        </div>
+                        <div class="error text-danger mt-3">
+                            @ViewBag.ErrorRegister
+                        </div>
+                    </div>
+                        <div class="signup-image">
+                            <figure><img src="~/Content/Image/signup-image.jpg" alt="sing up image"></figure>
+                            <a href="~/Login_63131717/Index" class="signup-image-link">Tôi đã có tài khoản ?</a>
+                        </div>
+                    </div>
+            </div>
+        </section>
+    }
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/main.js"></script>
+</body>
+</html>

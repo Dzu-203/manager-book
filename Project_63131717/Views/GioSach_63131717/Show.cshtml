@@ -1,0 +1,129 @@
+﻿@model Project_63131717.Models.GioSach_63131717
+
+
+@{
+    ViewBag.Title = "Phiếu mượn";
+    Layout = "~/Views/Shared/LayoutUser2.cshtml";
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+
+
+
+<h2 style="text-align: center; color: #0d1a69; font-weight: 700" class="text-uppercase">Phiếu Mượn Sách</h2>
+
+<a style="padding:5px 18px;margin-bottom:3%;background:red;color:white" class="btn btn-default" href="@Url.Action("Index","ListBook_63131717") ">Tiếp tục Mượn </a>
+<style>
+    td,th{
+        text-align:center
+    }
+</style>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table">
+                <!-- ... nội dung của bảng đầu tiên ... -->
+                <thead style="background: #f7eded ">
+                    <tr>
+                        <th>Tên Sách</th>
+                        <th>Hình ảnh</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng cộng</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Item)
+                    {
+                        double sum = item._soluongSach * 1;
+                        <tr>
+                            <td>@Html.DisplayFor(Model => item.giosach.TenSach)</td>
+                            <td><img src="~/Areas/Admin_63131717/Images/@item.giosach.HinhAnh" style="width:100px;height:150px" /></td>
+                            <td>
+                                @using (Html.BeginForm("Update_quantity", "GioSach_63131717"))
+                                {
+                                    <input type="hidden" value="@item.giosach.IDSach" name="Idsach" />
+                                    <input type="number" value="@item._soluongSach" style="max-width:90px" name="quantity" min="0" required />
+                                    <input type="submit" style="border-radius:5px;background:#4133f5;border:0;padding:3px 10px;color:white;margin-left:5px" value="Cập nhật" />
+
+                                }
+                            </td>
+                            <td>@sum</td>
+                            <td> <a href="~/GioSach_63131717/Remove/@item.giosach.IDSach" class="edit-btn delete-btn"><abbr title="Xóa dữ liệu"><img src="~/Areas/Admin_63131717/Content/Images/delete.png" width="20" height="20" /></abbr></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4" style="padding:10px;border-left:1px solid #000">
+            <table class="table" >
+                <!-- ... nội dung của bảng thứ hai ... -->
+                <tbody>
+                    <h2 class="text-center mb-3 text-uppercase" style="color:#07065b;font-weight:700">Thông tin</h2><hr />
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="4" style="text-align:center">
+                            @using (Html.BeginForm("MuonSach", "GioSach_63131717", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <table style="border-collapse: separate; border-spacing: 5px">
+                                    <tr>
+                                        <td>Tài khoản:</td>
+                                        <td><input type="text" name="NameUser" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mật khẩu:</td>
+                                        <td><input type="password" name="Password" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày Mượn:</td>
+                                        <td><input type="datetime" value="@DateTime.Now.ToString("dd/MM/yyyy")" name="NgayMuon" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày Trả:</td>
+                                        <td><input type="date" style="width:100%" name="NgayTra" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input type="submit" name="Muon" value="Mượn Sách" class="btn btn-success" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align:right">Tổng Cộng: @Model.sum()</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.delete-btn').on('click', function (e) {
+            e.preventDefault(); // Ngăn chặn chuyển hướng mặc định của thẻ 'a'
+
+            var url = $(this).attr('href'); // Lấy đường dẫn từ thuộc tính href của thẻ 'a'
+
+            // Hiển thị hộp thoại xác nhận
+            if (confirm("Bạn có chắc chắn muốn xóa sách này không?")) {
+                // Nếu người dùng xác nhận, chuyển hướng đến đường dẫn được lấy từ href
+                window.location.href = url;
+            }
+        });
+    });
+</script>

@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<Project_63131717.Models.CT_PM>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin_63131717/Views/Shared/PageAdmin.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet"/>
+<div class="pb-4 d-flex align-items-center">
+    <h2 style="font-family:Arial, Helvetica, sans-serif;font-weight:600;color:#413939;margin:0;text-transform:uppercase">chi tiết phiếu mượn</h2>
+</div>
+
+<style>
+    .chucnang a{
+        text-decoration:none;
+        color:black;
+        padding:5px 10px;
+        /*background:#160abe*/
+    }
+</style>
+
+<table class="table  table-striped-columns">
+    <tr style="background: #f8eeee">
+        <th>
+            ID phiếu mượn
+        </th>
+        <th>
+            ID độc giả
+        </th>
+        <th>
+            Tên độc giả
+        </th>
+        <th>
+            ID sách
+        </th>
+        <th>
+            Tên sách
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+           Trạng thái
+        </th>
+        <th>
+            Ngày trả thực tế
+        </th>
+       <th class="text-center">
+           Chức năng
+       </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDPM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDDG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocGia.TenDG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDSach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sach.TenSach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai1.TenTrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayTraThucTe)
+        </td>
+        <td class="chucnang text-center">
+            @Html.ActionLink("Trả sách", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

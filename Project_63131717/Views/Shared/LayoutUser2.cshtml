@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+@{
+    var user = HttpContext.Current.Session["NameUser"].ToString();
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Areas/Admin_63131717/Content/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+<body style="background: #f9fafa">
+
+    <div class="header">
+        <div id="body-pd">
+            <header class="header" id="header">
+                <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+                @* <a style="text-decoration:none;color:black" href="#"><i class="bx bx-user nav-icon" style="margin-right:5px"></i>@user</a>*@
+                <div class="user-menu">
+                    <div class="dropdown">
+                        <button class="dropbtn"><a style="text-decoration:none;color:black" href="#"><i class="bx bx-user nav-icon" style="margin-right:5px"></i>@user</a></button>
+                        <div class="dropdown-content">
+                            <a href="#">Profile</a>
+                            <a href="~/Login_63131717/LogOut">Log out</a>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+            <div class="l-navbar" id="nav-bar" style="background:#0e0c0c">
+                <nav class="nav">
+                    <div>
+                        <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">LIBRARY BOOK</span> </a>
+                        <div class="nav_list">
+                            <a href="~/ListBook_63131717/Index" class="nav_link active"> <i class='bx bx-book-open nav_icon'></i> <span class="nav_name">Danh sách các sách</span> </a>
+                            <a href="~/TraCuuPhieuMuon_63131717/Index" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Phiếu mượn sách</span> </a>
+                            <a href="~/GioSach_63131717/Show" class="nav_link"> <i class='bx bx-shopping-bag'></i> <span class="nav_name">Giỏ hàng</span> </a>
+
+                        </div>
+                    </div> <a href="~/Login_63131717/LogOut" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Out</span> </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="content" style="margin-top:80px">
+        @RenderBody()
+    </div>
+    <footer class="footer_section mt-5">
+        <hr />
+        <div class="container text-center m-3">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved 2023
+
+            </p>
+        </div>
+    </footer>
+    <script src="~/Areas/Admin_63131717/Content/admin.js"></script>
+</body>
+
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
